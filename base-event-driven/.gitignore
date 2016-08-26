@@ -1,0 +1,10 @@
+.settings/
+settings/
+target/
+.classpath
+bin/
+.project
+/
+.apt_generated/
+.factorypath
+.gitignore.bak

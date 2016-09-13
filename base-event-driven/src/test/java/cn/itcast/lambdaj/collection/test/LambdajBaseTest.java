@@ -1,10 +1,20 @@
 package cn.itcast.lambdaj.collection.test;
 
+import static ch.lambdaj.Lambda.extract;
+import static ch.lambdaj.Lambda.having;
+import static ch.lambdaj.Lambda.index;
+import static ch.lambdaj.Lambda.joinFrom;
+import static ch.lambdaj.Lambda.max;
+import static ch.lambdaj.Lambda.maxFrom;
+import static ch.lambdaj.Lambda.minFrom;
+import static ch.lambdaj.Lambda.on;
+import static ch.lambdaj.Lambda.select;
+import static ch.lambdaj.Lambda.selectMax;
+import static ch.lambdaj.Lambda.sort;
+import static ch.lambdaj.Lambda.sum;
+import static ch.lambdaj.Lambda.sumFrom;
+
 import java.util.ArrayList;
-import ch.lambdaj.function.closure.Closure; 
-import static ch.lambdaj.Lambda.*;
-import static ch.lambdaj.collection.LambdaCollections.*;
-import static org.hamcrest.Matchers.*;
 import java.util.List;
 import java.util.Map;
 
@@ -97,5 +107,14 @@ public class LambdajBaseTest {
 	public void indexP() {
 		Map<String,Person> mapByName = index(persons, on(Person.class).getName()) ;
 		System.out.println(JSONObject.toJSONString(mapByName));
+	}
+	
+	@Test
+	public void testExtra() {
+		String str = "[{'id': '111', 'name':'zhangsan'}, {'id':'222','name':'lisi'}, {'id':'333','name':'wangwu'},{'id':'222','name':'zhaoliu'}]" ;
+		JSONArray jsonArray = JSONArray.parseArray(str) ;
+		System.out.println(jsonArray);
+		List<Object> list = select(jsonArray, having(on(JSONObject.class).getString("id"), Matchers.equalTo("222"))) ;
+		System.out.println(JSONArray.toJSONString(list));
 	}
 }
